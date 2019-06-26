@@ -7,8 +7,11 @@ function useFactorial() {
   const [result, setResult] = useState(0)
 
   async function calculate(number) {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/factorial`, {
+    let response = await fetch(`${process.env.REACT_APP_API_URL}/factorial`, {
       method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ number })
     }).then(res => res.json())
     setResult(response.result)
